@@ -1,3 +1,14 @@
+/*
+* Author: Michelle Aurora, Zee Dugar, Mark DeJarnett,
+*         Elisa Gonzalez, Elissa Skinner
+* Assignment Title: Final Project
+* Assignment Description: This program implements
+*         the point functions.
+* Due Date: 4/5/2019
+* Date Created: 1/17/2019
+* Date Last Modified: 1/28/2019
+*/
+
 #include "point.h"
 
 /*

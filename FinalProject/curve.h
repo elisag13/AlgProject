@@ -1,10 +1,20 @@
+/*
+* Author: Michelle Aurora, Zee Dugar, Mark DeJarnett,
+*         Elisa Gonzalez, Elissa Skinner
+* Assignment Title: Final Project
+* Assignment Description: This program implements
+*         the line functions.
+* Due Date: 4/5/2019
+* Date Created: 1/17/2019
+* Date Last Modified: 1/28/2019
+*/
+
 #ifndef FINALPROJECT_CURVE_H
 #define FINALPROJECT_CURVE_H
 
 #include <iostream>
 #include <vector>
 
-#include "SDL_Plotter.h"
 #include "line.h"
 
 using namespace std;
@@ -20,10 +30,9 @@ public:
     void draw(Data_t data, SDL_Plotter&);
     bool getSameScale(){ return sameScale;}
     void setSameScale(bool t){sameScale = t;}
-    void plotAxis(int margin, int maxX, int maxY, SDL_Plotter& g);
 
 private:
-    //void plotAxis(int margin, int maxX, int maxY, SDL_Plotter& g);
+    void plotAxis(int margin, int maxX, int maxY, SDL_Plotter& g);
     void plotTickMarks(int margin, int maxX, int maxY, SDL_Plotter& g);
     bool goodPoints(line a, int margin, SDL_Plotter& g);
     bool sameScale;

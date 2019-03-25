@@ -35,6 +35,10 @@ algorithm
 -
 float.h
 -
+cstdlib
+-
+line.h
+C:/Users/Michelle/CLionProjects/FinalProject/line.h
 point.h
 C:/Users/Michelle/CLionProjects/FinalProject/point.h
 
@@ -55,8 +59,6 @@ iostream
 -
 vector
 -
-SDL_Plotter.h
-C:/Users/Michelle/CLionProjects/FinalProject/SDL_Plotter.h
 line.h
 C:/Users/Michelle/CLionProjects/FinalProject/line.h
 
@@ -76,6 +78,8 @@ iostream
 cstdlib
 -
 string
+-
+time.h
 -
 closestPair.h
 C:/Users/Michelle/CLionProjects/FinalProject/closestPair.h

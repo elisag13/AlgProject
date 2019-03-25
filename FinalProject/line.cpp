@@ -1,12 +1,13 @@
 /*
-* Author: Michelle Aurora
-* Assignment Title: Program 0
+* Author: Michelle Aurora, Zee Dugar, Mark DeJarnett,
+*         Elisa Gonzalez, Elissa Skinner
+* Assignment Title: Final Project
 * Assignment Description: This program implements
-*   the curve functions.
-* Due Date: 1/28/109
+*         the line functions.
+* Due Date: 4/5/2019
 * Date Created: 1/17/2019
 * Date Last Modified: 1/28/2019
- */
+*/
 
 #include "line.h"
 

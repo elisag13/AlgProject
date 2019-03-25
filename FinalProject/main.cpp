@@ -1,6 +1,19 @@
+/*
+* Author: Michelle Aurora, Zee Dugar, Mark DeJarnett,
+*         Elisa Gonzalez, Elissa Skinner
+* Assignment Title: Final Project
+* Assignment Description: This program runs and shows the visualization of
+*         the brute force closest pair and convex hull algorithms
+*         and the divide & conquer closest pair and convex hull algorithms.
+* Due Date: 4/5/2019
+* Date Created: 3/18/2019
+* Date Last Modified: 3/24/2019
+*/
+
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <time.h>
 
 #include "closestPair.h"
 #include "point.cpp"
@@ -10,15 +23,16 @@
 
 /*TO DO
  * - divide and conquer convex hull
- * - graphics (plan)
+ * - graphics
+ *      * need to slow down the bf closest pir graphics (press key C)
  *
- * - fix random points to stay within bounds
  *
  * DONE
- *  - both closest pair
- *  - brute convex hull
+ *  - brute force closest pair
+ *  - div and conquer closest pair
+ *  - brute force convex hull
  *
- *  - github?
+ *  - github repo set up
  */
 
 using namespace std;
@@ -29,20 +43,13 @@ const int COL_MAX = 1000;
 //for axis
 const int MARGIN = 50;
 
-SDL_Plotter g(ROW_MAX, COL_MAX);
-int *data;
-
-
-//function prototypes
-void plotData(int x, int y);
-void RandomizeData(int x, int y);
-
 int main(int argc, char* argv[]){
-    curve crv;
-    /*
-    cout << "Brute Force:  " << bruteForceClosestPair(testPts) << endl;
-    cout << "Div & Conquer: " << divideAndConquerClosestPair(testPts) << endl;
-    */
+    //initialize plotter with dimensions
+    SDL_Plotter g(ROW_MAX, COL_MAX);
+    g.update();
+
+    //points
+    vector<point> setOfPoints;
 
     //adjust the coordinates of the axes based on the margin
     int adjustYAxis = ROW_MAX-(MARGIN+1);
@@ -50,50 +57,37 @@ int main(int argc, char* argv[]){
 
     cout << adjustXAxis << " " << adjustYAxis << endl;
 
-    //dynamically allocate the array for random data
-    data = new int [adjustYAxis];
-
-    for(int i =0; i < adjustYAxis; i++){
-        data[i] = rand()%adjustYAxis;
-    }
-
     while (!g.getQuit()) {
         //plot axes on screen
-        crv.plotAxis(MARGIN, adjustXAxis, adjustYAxis, g);
+        //crv.plotAxis(MARGIN, adjustXAxis, adjustYAxis, g);
 
         if (g.kbhit()) {
+            g.clear();
+            setOfPoints.clear();
+
+            srand(time(NULL));
+            //randomize the points (30 currently for testing)
+            for(int i = 0; i < 30; i++){
+                int maxPtY = (rand() % adjustYAxis);
+                int maxPtX = (rand() % adjustXAxis);
+
+                //make a random point
+                point pt(maxPtX, maxPtY);
+
+                //add to set of points
+                setOfPoints.push_back(pt);
+            }
+
             switch (g.getKey()) {
-                case 'R':
-                    RandomizeData(adjustXAxis, adjustYAxis);
-                    break;
-                case 'X': g.setQuit(true);
-                    break;
+                case 'C':
+                    bruteForceClosestPair(g, setOfPoints);
+
+                case 'P':
+                    pair<point, point> pairOfPoints;
+                    divideAndConquerClosestPair(g, setOfPoints, pairOfPoints);
             }
         }
-        plotData(adjustXAxis, adjustYAxis);
     }
 
     return 0;
-}
-
-//generate random points
-void RandomizeData(int adjustXAxis, int adjustYAxis) {
-    g.clear();
-    for(int i = MARGIN; i < adjustYAxis; i++){
-        data[i] = rand()%adjustYAxis;
-    }
-    plotData(adjustXAxis, adjustYAxis);
-}
-
-//main draw function, gets called over and over, as fast as possible
-void plotData(int adjustXAxis, int adjustYAxis) {
-    for(int i = MARGIN; i < adjustYAxis;i++){
-        g.plotPixel(i,data[i],0,0,0);
-
-        if(i + 1 < adjustYAxis) g.plotPixel(i+1,data[i],0,0,0);
-        if(i - 1 >= 0) g.plotPixel(i-1,data[i],0,0,0);
-        if(data[i] + 1 < adjustYAxis) g.plotPixel(i,data[i]+1,0,0,0);
-        if(data[i] - 1 >= 0)g.plotPixel(i,data[i]-1,0,0,0);
-    }
-    g.update();
 }
